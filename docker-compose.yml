@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  test:
+    container_name: test-service
+    build: .
+    image: test_test
+    command: /user/local/entrypoint.sh
+    restart: unless-stopped
+    ports:
+      - "5051:5050"
+    environment:
+      MYSQL_HOST: host.docker.internal
+    volumes:
+      - ./src/:/src/
