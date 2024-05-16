@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.0.3
 info:
   title: FastAPI
   version: 0.1.0
@@ -186,22 +186,18 @@ components:
         title:
           anyOf:
             - type: string
-            - type: 'null'
           title: Title
         sub_title:
           anyOf:
             - type: string
-            - type: 'null'
           title: Sub Title
         sort_order:
           anyOf:
             - type: integer
-            - type: 'null'
           title: Sort Order
         rout_link:
           anyOf:
             - type: string
-            - type: 'null'
           title: Rout Link
         has_rout_link:
           type: boolean
@@ -233,7 +229,7 @@ components:
         sort_order:
           anyOf:
             - type: integer
-            - type: 'null'
+            
           title: Sort Order
         meta:
           $ref: '#/components/schemas/CategoryTagSchema'
@@ -256,32 +252,32 @@ components:
         seo_title:
           anyOf:
             - type: string
-            - type: 'null'
+            
           title: Seo Title
         seo_desc:
           anyOf:
             - type: string
-            - type: 'null'
+            
           title: Seo Desc
         h1_tag:
           anyOf:
             - type: string
-            - type: 'null'
+            
           title: H1 Tag
         h2_tag:
           anyOf:
             - type: string
-            - type: 'null'
+            
           title: H2 Tag
         h3_tag:
           anyOf:
             - type: string
-            - type: 'null'
+            
           title: H3 Tag
         alt_img_tag:
           anyOf:
             - type: string
-            - type: 'null'
+            
           title: Alt Img Tag
       type: object
       required:
@@ -303,7 +299,7 @@ components:
         sort_order:
           anyOf:
             - type: integer
-            - type: 'null'
+            
           title: Sort Order
         coupon_type:
           type: string
@@ -314,7 +310,7 @@ components:
         description:
           anyOf:
             - type: string
-            - type: 'null'
+            
           title: Description
       type: object
       required:
@@ -394,12 +390,12 @@ components:
         image:
           anyOf:
             - type: string
-            - type: 'null'
+            
           title: Image
         sku:
           anyOf:
             - type: string
-            - type: 'null'
+            
           title: Sku
       type: object
       required:
@@ -429,7 +425,7 @@ components:
         landmark:
           anyOf:
             - type: string
-            - type: 'null'
+            
           title: Landmark
         address_1:
           type: string
@@ -437,7 +433,7 @@ components:
         address_2:
           anyOf:
             - type: string
-            - type: 'null'
+            
           title: Address 2
         is_default:
           type: string
@@ -507,12 +503,12 @@ components:
         mobile:
           anyOf:
             - type: integer
-            - type: 'null'
+            
           title: Mobile
         profile:
           anyOf:
             - type: string
-            - type: 'null'
+            
           title: Profile
         is_verified:
           type: boolean
