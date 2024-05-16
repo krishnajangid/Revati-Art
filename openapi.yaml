@@ -1,0 +1,571 @@
+openapi: 3.1.0
+info:
+  title: FastAPI
+  version: 0.1.0
+paths:
+  /api/v1/category/:
+    get:
+      summary: Get All Category View
+      operationId: get_all_category_view_api_v1_category__get
+      security:
+        - HTTPBearer: []
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 1
+            title: Page
+        - name: per_page
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 20
+            title: Per Page
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginationOutSchema_CategoryOutSchema_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/user/login/:
+    post:
+      summary: User Login View
+      operationId: user_login_view_api_v1_user_login__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLoginInSchema'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserLoginOutSchema'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/user/register/:
+    post:
+      summary: User Register View
+      operationId: user_register_view_api_v1_user_register__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegisterInSchema'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/user/me/:
+    get:
+      summary: User Me View
+      operationId: user_me_view_api_v1_user_me__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserMeOutSchema'
+      security:
+        - HTTPBearer: []
+  /api/v1/user/address/:
+    get:
+      summary: User Me View
+      operationId: user_me_view_api_v1_user_address__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/UserAddressOutSchema'
+                type: array
+                title: Response User Me View Api V1 User Address  Get
+      security:
+        - HTTPBearer: []
+  /api/v1/banner/:
+    get:
+      summary: Get Banner View
+      operationId: get_banner_view_api_v1_banner__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BannerOutSchema'
+                type: array
+                title: Response Get Banner View Api V1 Banner  Get
+  /api/v1/coupon/:
+    get:
+      summary: Get Coupon View
+      operationId: get_coupon_view_api_v1_coupon__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CouponOutSchema'
+                type: array
+                title: Response Get Coupon View Api V1 Coupon  Get
+  /api/v1/products/:
+    get:
+      summary: Get All Products View
+      operationId: get_all_products_view_api_v1_products__get
+      security:
+        - HTTPBearer: []
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 1
+            title: Page
+        - name: per_page
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 20
+            title: Per Page
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginationOutSchema_ProductsOutSchema_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    BannerOutSchema:
+      properties:
+        id:
+          type: integer
+          title: Id
+        image:
+          type: string
+          title: Image
+        title:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Title
+        sub_title:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Sub Title
+        sort_order:
+          anyOf:
+            - type: integer
+            - type: 'null'
+          title: Sort Order
+        rout_link:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Rout Link
+        has_rout_link:
+          type: boolean
+          title: Has Rout Link
+      type: object
+      required:
+        - id
+        - image
+        - title
+        - sub_title
+        - sort_order
+        - rout_link
+        - has_rout_link
+      title: BannerOutSchema
+    CategoryOutSchema:
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+        image:
+          type: string
+          title: Image
+        sort_order:
+          anyOf:
+            - type: integer
+            - type: 'null'
+          title: Sort Order
+        meta:
+          $ref: '#/components/schemas/CategoryTagSchema'
+        child:
+          items: {}
+          type: array
+          title: Child
+          default: []
+      type: object
+      required:
+        - id
+        - name
+        - description
+        - image
+        - sort_order
+        - meta
+      title: CategoryOutSchema
+    CategoryTagSchema:
+      properties:
+        seo_title:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Seo Title
+        seo_desc:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Seo Desc
+        h1_tag:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: H1 Tag
+        h2_tag:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: H2 Tag
+        h3_tag:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: H3 Tag
+        alt_img_tag:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Alt Img Tag
+      type: object
+      required:
+        - seo_title
+        - seo_desc
+        - h1_tag
+        - h2_tag
+        - h3_tag
+        - alt_img_tag
+      title: CategoryTagSchema
+    CouponOutSchema:
+      properties:
+        id:
+          type: integer
+          title: Id
+        code:
+          type: string
+          title: Code
+        sort_order:
+          anyOf:
+            - type: integer
+            - type: 'null'
+          title: Sort Order
+        coupon_type:
+          type: string
+          title: Coupon Type
+        coupon_value:
+          type: integer
+          title: Coupon Value
+        description:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Description
+      type: object
+      required:
+        - id
+        - code
+        - sort_order
+        - coupon_type
+        - coupon_value
+        - description
+      title: CouponOutSchema
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PaginationOutSchema_CategoryOutSchema_:
+      properties:
+        total:
+          type: integer
+          title: Total
+        page_size:
+          type: integer
+          title: Page Size
+        page_number:
+          type: integer
+          title: Page Number
+        result:
+          items:
+            $ref: '#/components/schemas/CategoryOutSchema'
+          type: array
+          title: Result
+      type: object
+      required:
+        - total
+        - page_size
+        - page_number
+        - result
+      title: PaginationOutSchema[CategoryOutSchema]
+    PaginationOutSchema_ProductsOutSchema_:
+      properties:
+        total:
+          type: integer
+          title: Total
+        page_size:
+          type: integer
+          title: Page Size
+        page_number:
+          type: integer
+          title: Page Number
+        result:
+          items:
+            $ref: '#/components/schemas/ProductsOutSchema'
+          type: array
+          title: Result
+      type: object
+      required:
+        - total
+        - page_size
+        - page_number
+        - result
+      title: PaginationOutSchema[ProductsOutSchema]
+    ProductsOutSchema:
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+        image:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Image
+        sku:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Sku
+      type: object
+      required:
+        - id
+        - name
+        - description
+        - image
+        - sku
+      title: ProductsOutSchema
+    UserAddressOutSchema:
+      properties:
+        id:
+          type: integer
+          title: Id
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        country:
+          type: string
+          title: Country
+        zip_code:
+          type: string
+          title: Zip Code
+        landmark:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Landmark
+        address_1:
+          type: string
+          title: Address 1
+        address_2:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Address 2
+        is_default:
+          type: string
+          title: Is Default
+        address_type:
+          type: string
+          title: Address Type
+      type: object
+      required:
+        - id
+        - city
+        - state
+        - country
+        - zip_code
+        - landmark
+        - address_1
+        - address_2
+        - is_default
+        - address_type
+      title: UserAddressOutSchema
+    UserLoginInSchema:
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email
+        password:
+          type: string
+          title: Password
+      type: object
+      required:
+        - email
+        - password
+      title: UserLoginInSchema
+      example:
+        email: test@gmail.com
+        password: test@123
+    UserLoginOutSchema:
+      properties:
+        access_token:
+          type: string
+          title: Access Token
+        user_id:
+          type: integer
+          title: User Id
+        user_email:
+          type: string
+          title: User Email
+      type: object
+      required:
+        - access_token
+        - user_id
+        - user_email
+      title: UserLoginOutSchema
+    UserMeOutSchema:
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          type: string
+          title: Name
+        email:
+          type: string
+          format: email
+          title: Email
+        mobile:
+          anyOf:
+            - type: integer
+            - type: 'null'
+          title: Mobile
+        profile:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Profile
+        is_verified:
+          type: boolean
+          title: Is Verified
+      type: object
+      required:
+        - id
+        - name
+        - email
+        - mobile
+        - profile
+        - is_verified
+      title: UserMeOutSchema
+    UserRegisterInSchema:
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email
+        password:
+          type: string
+          title: Password
+        name:
+          type: string
+          title: Name
+      type: object
+      required:
+        - email
+        - password
+        - name
+      title: UserRegisterInSchema
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+        - loc
+        - msg
+        - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer
